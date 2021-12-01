@@ -1,6 +1,6 @@
 import sys
 import pygame
-
+from alien import Alien
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
@@ -19,6 +19,8 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+        self.aliens = pygame.sprite.Group()
+        self._create_fleet()
         # Назнаение цвета фона.
         self.bg_color = (230, 230, 230)
     def run_game(self):
@@ -68,6 +70,7 @@ class AlienInvasion:
         self.ship.bltime()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
+        self.aliens.draw(self.screen)
         pygame.display.flip()
     def _update_bullets(self):
         """Обновляем позиции снарядов и уничтожаем старые снаряды"""
@@ -78,6 +81,11 @@ class AlienInvasion:
         for bullet in self.bullets.copy():
             if bullet.rect.bottom <= 0:
                 self.bullets.remove(bullet)
+    def _create_fleet(self):
+        """Создание флота вторжения"""
+        # Создание пришельца
+        alien = Alien(self)
+        self.aliens.add(alien)
 if __name__ == '__main__':
     # Создание экземпляра и запуск игры.
     ai = AlienInvasion()
