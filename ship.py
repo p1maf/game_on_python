@@ -12,12 +12,8 @@ class Ship:
         self.image = pygame.image.load('icon//1.svg')
         self.image = pygame.transform.scale(self.image, (100, 100))
         self.rect = self.image.get_rect()
-        # Каждый новый корабль появляется у нижнего края экрана
         self.rect.midbottom = self.screen_rect.midbottom
-
-        # Сохранение вещественной координаты центра корабля.
         self.x = float(self.rect.x)
-
         # Флаг перемещения
         self.moving_right = False
         self.moving_left = False
@@ -34,3 +30,7 @@ class Ship:
     def bltime(self):
         """"Ризует корабль в текущей позиции"""
         self.screen.blit(self.image, self.rect)
+    def center_ship(self):
+        """Размещает корабль в центре нижней стороны"""
+        self.rect.midbottom = self.screen_rect.midbottom
+        self.x = float(self.rect.x)
