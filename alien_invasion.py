@@ -17,7 +17,7 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((600, 600))
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
@@ -82,7 +82,9 @@ class AlienInvasion:
             self.aliens.empty()
             self.bullets.empty()
             # Создание нового флота и размещение корабля в центре.
-
+            self.sb.prep_score()
+            self.sb.prep_level()
+            self.sb.prep_ships()
             self._create_fleet()
             self.ship.center_ship()
             # Указатель мыши скрывается.
@@ -183,13 +185,15 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings.increase_speed()
-
+            # Увеличение уровня.
+            self.stats.level += 1
+            self.sb.prep_level()
     def _ship_hit(self):
         """Обрабатывает столкновение корабля с пришельцем."""
         # Уменьшение ships_left
         if self.stats.ships_left > 0:
             self.stats.ships_left -= 1
-
+            self.sb.prep_ships()
             # Очистка списков пришельцев и снарядов.
             self.aliens.empty()
             self.bullets.empty()

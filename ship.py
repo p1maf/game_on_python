@@ -1,13 +1,13 @@
 import pygame
-
-class Ship:
+from pygame.sprite import Sprite
+class Ship(Sprite):
     """Класс для управления кораблем."""
 
     def __init__(self, ai_game):
+        super().__init__()
         self.screen = ai_game.screen
         self.settings = ai_game.settings
         self.screen_rect = ai_game.screen.get_rect()
-
         # Загружает изображение корабля и получает прямоугольник
         self.image = pygame.image.load('icon//1.svg')
         self.image = pygame.transform.scale(self.image, (100, 100))
