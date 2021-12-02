@@ -18,7 +18,7 @@ class AlienInvasion:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode((1200, 900))
-        self.fon = pygame.image.load('icon/vselennaya-oboi-1280x960_20.jpg')
+        self.fon = pygame.image.load('icon/задний_фон.jpg')
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
