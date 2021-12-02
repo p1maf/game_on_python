@@ -17,7 +17,8 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode((1200, 900))
+        self.fon = pygame.image.load('icon/vselennaya-oboi-1280x960_20.jpg')
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
@@ -98,7 +99,7 @@ class AlienInvasion:
 
     def _update_screen(self):
         """Обновляет изображения на экране и отображает новый экран."""
-        self.screen.fill(self.settings.bg_color)
+        self.screen.blit(self.fon, (0, 0))
         self.ship.bltime()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
