@@ -20,5 +20,18 @@ class Settings:
         # Настройка пришельцев
         self.alien_speed = 10.0
         self.fleet_drop_speed = 10
+        # Темп ускорения игры
+        self.speedup_scale = 1.1
+        self.initalize_dynamic_settings()
+    def initalize_dynamic_settings(self):
+        """Инициализирует насйтроки, изменяюшиеся в ходе игры"""
+        self.ship_speed_factor = 1.5
+        self.bullet_speed_factor = 3.0
+        self.alien_speed_factor = 1.0
         # fleed_direction = 1, обозначет движение вправо, а -1 - влево.
         self.fleet_direction = 1
+    def increase_speed(self):
+        """Увеличивает настройки скорости."""
+        self.ship_speed_factor *= self.speedup_scale
+        self.bullet_speed_factor *= self.speedup_scale
+        self.alien_speed_factor *= self.speedup_scale
