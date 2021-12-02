@@ -17,7 +17,7 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
 
-        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.screen = pygame.display.set_mode((600, 600))
         self.settings.screen_width = self.screen.get_rect().width
         self.settings.screen_height = self.screen.get_rect().height
         pygame.display.set_caption("Alien Invasion")
@@ -76,19 +76,16 @@ class AlienInvasion:
         button_clicked = self.play_button.rect.collidepoint(mouse_pos)
         if button_clicked and not self.stats.game_active:
             # Сброс игровой статистики.
-            self.settings.initalize_dynamic_settings()
             self.stats.reset_stats()
             self.stats.game_active = True
-            self.sb.prep_score()
-            # Очистка списков пришельцев и снарядов
+            # Очистка списков пришельцев и снарядов.
             self.aliens.empty()
             self.bullets.empty()
-
             # Создание нового флота и размещение корабля в центре.
+
             self._create_fleet()
             self.ship.center_ship()
-
-            # Указатель мыши скрывается
+            # Указатель мыши скрывается.
             pygame.mouse.set_visible(False)
 
     def _fire_bullet(self):
@@ -180,6 +177,7 @@ class AlienInvasion:
             for aliens in collisions.values():
                 self.stats.score += self.settings.alien_points * len(aliens)
             self.sb.prep_score()
+            self.sb.check_high_score()
         if not self.aliens:
             # Уничтожение существующих снарядов и создание нового флота.
             self.bullets.empty()
@@ -201,8 +199,8 @@ class AlienInvasion:
             self.ship.center_ship()
             sleep(0.5)
         else:
-            pygame.mouse.set_visible(True)
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
 
     def _check_aliens_bottom(self):
         """Проверяет, добрались ли пришельцы до нижнего края экрана."""
